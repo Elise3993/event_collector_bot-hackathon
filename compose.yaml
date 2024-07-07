@@ -1,0 +1,15 @@
+services:
+  discord_frontend:
+    container_name: discord_frontend_container
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+  discord_backend:
+    container_name: discord_backend_container
+    build: ./backend
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
