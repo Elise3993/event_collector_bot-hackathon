@@ -4,5 +4,38 @@
 	"build": {
 		"dockerfile": "../Dockerfile"
 	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"eamodio.gitlens",
+				"usernamehw.errorlens",
+				"esbenp.prettier-vscode",
+				"dbaeumer.vscode-eslint",
+				"gamunu.vscode-yarn",
+				"christian-kohler.path-intellisense",
+				"shardulm94.trailing-spaces",
+				"mhutchie.git-graph"
+			],
+			"settings": {
+				"files.trimTrailingWhitespace": true,
+				"files.insertFinalNewline": true,
+				"files.trimFinalNewlines": true,
+				"editor.formatOnSave": true,
+				"[javascript]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode"
+				},
+				"[dockerfile]": {
+					"editor.defaultFormatter": "ms-azuretools.vscode-docker"
+				},
+				"editor.codeActionsOnSave": {
+					"source.fixAll.eslint": "explicit"
+				},
+				"prettier.eslintIntegration": true,
+				"prettier.trailingComma": "all",
+				"prettier.printWidth": 120
+			}
+		}
+	},
 	"remoteUser": "node"
 }
