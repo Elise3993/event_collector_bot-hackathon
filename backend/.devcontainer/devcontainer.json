@@ -2,7 +2,7 @@
 {
 	"name": "Discord Bot",
 	"build": {
-		"dockerfile": "Dockerfile"
+		"dockerfile": "../Dockerfile"
 	},
 	"customizations": {
 		"vscode": {

@@ -8,5 +8,8 @@ ARG USERNAME=node
 RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
-# Set `DEVCONTAINER` environment variable to help with orientation
-ENV DEVCONTAINER=true
+# 以下手動で追加
+WORKDIR /app
+COPY . .
+RUN yarn install
+CMD ["yarn", "dev"]
