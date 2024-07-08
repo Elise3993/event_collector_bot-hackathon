@@ -13,6 +13,7 @@
 
 - WSLのインストール
 - VS Codeに[dev container](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)をインストール
+- このリポジトリをクローン
 
 ### Discord Bot/DB
 
