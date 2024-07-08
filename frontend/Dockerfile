@@ -12,7 +12,7 @@ FROM node:18
 # ENV DEVCONTAINER=true
 
 WORKDIR /app
-COPY package.json yarn.lock*
+COPY package.json yarn.lock* ./
 RUN yarn
 COPY . .
 CMD ["yarn", "dev"]
