@@ -1,13 +1,13 @@
 services:
-  discord_frontend:
-    container_name: discord_frontend_container
+  event_page:
+    container_name: event_page_container
     build: ./frontend
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=development
-  discord_backend:
-    container_name: discord_backend_container
+  discord_bot:
+    container_name: discord_bot_container
     build: ./backend
     ports:
       - "4000:4000"
@@ -15,10 +15,10 @@ services:
       - NODE_ENV=development
     depends_on:
       - discord_db
-  discord_db:
+  db:
     image: mysql:8.0.28
     platform: linux/amd64
-    container_name: discord_db_container
+    container_name: db_container
     ports:
       - "3306:3306"
     environment:

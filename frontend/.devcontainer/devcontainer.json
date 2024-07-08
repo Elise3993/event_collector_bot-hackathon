@@ -1,6 +1,7 @@
 // See https://containers.dev/implementors/json_reference/ for configuration reference
 {
-	"name": "Discord website",
+	"name": "Event Website",
+	"runArgs": ["--name", "devcontainer-frontend"],
 	"build": {
 		"dockerfile": "../Dockerfile"
 	},
