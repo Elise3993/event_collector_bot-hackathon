@@ -1,0 +1,23 @@
+{
+  "name": "discord_app",
+  "version": "1.0.0",
+  "main": "./src/index.mjs",
+  "private": true,
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.mjs",
+    "dev": "nodemon ./src/index.mjs",
+    "lint": "eslint ./"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "mysql2": "^3.10.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.6.0",
+    "eslint": "9.x",
+    "globals": "^15.8.0",
+    "nodemon": "^3.1.4"
+  }
+}
