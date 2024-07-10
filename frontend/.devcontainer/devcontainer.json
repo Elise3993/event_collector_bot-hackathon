@@ -1,7 +1,10 @@
 // See https://containers.dev/implementors/json_reference/ for configuration reference
 {
-	"name": "Event Website",
-	"runArgs": ["--name", "devcontainer-frontend"],
+	"name": "Web Page",
+	"runArgs": [
+		"--name",
+		"devcontainer_web_page"
+	],
 	"build": {
 		"dockerfile": "../Dockerfile"
 	},

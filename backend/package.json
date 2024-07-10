@@ -6,6 +6,7 @@
   "license": "ISC",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "mysql": "mysql -u user -ppassword -h db_container",
     "start": "node ./src/index.mjs",
     "dev": "nodemon ./src/index.mjs",
     "lint": "eslint ./"
