@@ -7,3 +7,5 @@ RUN apt update && apt install -y less sudo default-mysql-client
 ARG USERNAME=node
 RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
+
+RUN yarn
