@@ -1,10 +1,13 @@
 // See https://containers.dev/implementors/json_reference/ for configuration reference
 {
 	"name": "Discord Bot",
-	"runArgs": ["--name", "devcontainer-backend"],
-	"build": {
-		"dockerfile": "../Dockerfile"
-	},
+	"dockerComposeFile": "compose.yaml",
+	"service": "discord_bot",
+	"runArgs": [
+		"--name",
+		"devcontainer_bot"
+	],
+	"workspaceFolder": "/workspaces/",
 	"customizations": {
 		"vscode": {
 			"extensions": [
