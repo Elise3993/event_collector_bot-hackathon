@@ -1,15 +1,10 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
 import app from "./api/events.mjs";
-
-import {
-  CommandDefine,
-  ModalDefine,
-  ReceiveCommand,
-  ReceiveModal,
-} from "./command/add.mjs";
+import { addCommand } from "./command/add.mjs";
 dotenv.config();
 const { token } = process.env;
+
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
