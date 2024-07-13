@@ -1,26 +1,4 @@
-// データベース接続
-import dotenv from "dotenv";
-import mysql from "mysql2";
-
-export function setupDataBaseConnection() {
-  dotenv.config();
-
-  // データベース接続設定
-  const connection = mysql.createConnection({
-    host: process.env.MYSQL_CONTAINER_NAME,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: process.env.MYSQL_DATABASE,
-  });
-
-  // データベースに接続
-  connection.connect((err) => {
-    if (err) {
-      return console.error("エラー: " + err.message);
-    }
-    console.log("MySQLデータベースに接続しました。");
-  });
-}
+import {setupDataBaseConnection} from "./db.mjs";
 
 export function createEventDataTable() {
   const connection = setupDataBaseConnection();
