@@ -6,7 +6,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=development
+      NODE_ENV: development
     volumes:
       - ..:/workspaces/
     command: sleep infinity
@@ -17,7 +17,8 @@ services:
     ports:
       - "4000:4000"
     environment:
-      - NODE_ENV=development
+      NODE_ENV: development
+      TZ: "Asia/Tokyo"
     depends_on:
       - db
   db:
