@@ -45,6 +45,7 @@ export function fetchAllEventData() {
   connection.query(query, (err, results) => {
     if (err) throw err;
     console.log("データ取得成功:", results);
+    return results;
   });
   connection.end();
 }
