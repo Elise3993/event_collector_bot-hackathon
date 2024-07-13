@@ -6,7 +6,7 @@
   "license": "ISC",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "mysql": "mysql -u user -ppassword -h db_container",
+    "mysql": "dotenv -- bash -c 'mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -h $MYSQL_CONTAINER_NAME $MYSQL_DATABASE'",
     "start": "node ./src/index.mjs",
     "dev": "nodemon ./src/index.mjs",
     "lint": "eslint ./"
@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.6.0",
+    "dotenv-cli": "^7.4.2",
     "eslint": "9.x",
     "globals": "^15.8.0",
     "nodemon": "^3.1.4"

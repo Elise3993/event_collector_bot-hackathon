@@ -5,32 +5,28 @@ services:
     image: web_page
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=development
   discord_bot:
     container_name: discord_bot_container
     build: ./backend
     image: discord_bot
     ports:
       - "4000:4000"
-    environment:
-      - NODE_ENV=development
     depends_on:
       - db
   db:
     image: mysql:8.0.28
     platform: linux/amd64
-    container_name: db_container
+    container_name: ${MYSQL_CONTAINER_NAME}
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: app
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: "Asia/Tokyo"
     volumes:
-      - discord_bot_db_data_dev:/var/lib/mysql
+      - discord_bot_db_data:/var/lib/mysql
 
 volumes:
-  discord_bot_db_data_dev:
+  discord_bot_db_data:
