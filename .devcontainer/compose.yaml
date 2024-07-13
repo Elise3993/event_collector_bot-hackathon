@@ -1,14 +1,23 @@
 services:
-  discord_bot:
-    container_name: discord_bot_container
+  web_page:
+    container_name: web_page_devcontainer
+    build: ../frontend
+    image: web_page
     ports:
-      - "4000:4000"
-    build:
-      context: .
-      dockerfile: Dockerfile
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
     volumes:
       - ..:/workspaces/
     command: sleep infinity
+  discord_bot:
+    container_name: discord_bot_devcontainer
+    build: ../backend
+    image: discord_bot
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
     depends_on:
       - db
   db:
