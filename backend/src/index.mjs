@@ -1,5 +1,5 @@
-// import { Client, Events, GatewayIntentBits } from "discord.js";
-// import dotenv from "dotenv";
+import { Client, Events, GatewayIntentBits } from "discord.js";
+import dotenv from "dotenv";
 import app from "./api/api.mjs";
 import { addCommand } from "./command/add.mjs";
 dotenv.config();
