@@ -1,6 +1,15 @@
 import express from "express";
+import cors from "cors";
 
 const app = express();
+
+const corsOptions = {
+  origin: "http://localhost:3000", // 許可するオリジン
+  methods: "GET", // 許可するHTTPメソッド
+  optionsSuccessStatus: 204, // 一部の古いブラウザ向けのレスポンスステータス
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/api/v1/all_events", (req, res) => {

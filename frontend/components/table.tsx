@@ -4,32 +4,14 @@ import React, { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "../app/table.css";
 
-const data = [
-  { content: "0", team: "it班", price2: "¥10,000", date: "2024/3/6" },
-  { content: "1", team: "ゲーム班", price2: "¥10,000", date: "2024/4/6" },
-  { content: "2", team: "it班", price2: "¥10,000", date: "2024/5/6" },
-  { content: "3", team: "絵描き班", price2: "¥10,000", date: "2022/3/15" },
-  { content: "4", team: "dtm班", price2: "¥10,000", date: "2022/5/15" },
-  { content: "5", team: "ゲーム班", price2: "¥10,000", date: "2023/5/10" },
-  { content: "6", team: "ゲーム班", price2: "¥10,000", date: "2023/7/10" },
-  { content: "7", team: "dtm班", price2: "¥10,000", date: "2023/6/6" },
-  { content: "8", team: "dtm班", price2: "¥10,000", date: "2024/7/6" },
-  { content: "9", team: "絵描き班", price2: "¥10,000", date: "2024/8/6" },
-  { content: "10", team: "絵描き班", price2: "¥10,000", date: "2024/9/6" },
-  { content: "11", team: "dtm班", price2: "¥10,000", date: "2023/10/7" },
-  { content: "12", team: "dtm班", price2: "¥10,000", date: "2023/10/8" },
-  { content: "13", team: "dtm班", price2: "¥10,000", date: "2023/10/9" },
-  { content: "14", team: "dtm班", price2: "¥10,000", date: "2023/10/12" },
-  { content: "15", team: "dtm班", price2: "¥10,000", date: "2028/10/14" },
-  { content: "16", team: "dtm班", price2: "¥10,000", date: "2023/10/16" },
-  { content: "17", team: "dtm班", price2: "¥10,000", date: "2021/10/16" },
-  { content: "18", team: "dtm班", price2: "¥10,000", date: "2020/10/16" },
-  { content: "19", team: "dtm班", price2: "¥10,000", date: "2013/10/16" },
-  { content: "20", team: "dtm班", price2: "¥10,000", date: "2017/10/16" },
-  { content: "21", team: "dtm班", price2: "¥10,000", date: "2033/10/16" },
-
-  // 他のデータを追加する...
-];
+type Event = {
+  title: string;
+  start_date: string;
+  end_date: string;
+  description: string | null;
+  place: string | null;
+  server_name: string;
+};
 
 const Table: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1); // 現在のページ番号の状態管理
@@ -38,46 +20,61 @@ const Table: React.FC = () => {
   const [endDate, setEndDate] = useState({ year: "", month: "", day: "" }); // 範囲終了日の日付の状態管理
   const [sortOrder, setSortOrder] = useState<"asc" | "desc" | null>(null); // 日時の並び替え順序の状態管理
   const [selectedTeam, setSelectedTeam] = useState<string>("全て"); // 班名の選択状態管理
-  const [filteredData, setFilteredData] = useState(data); // フィルタリングされたデータの状態管理
-  const [shouldFilter, setShouldFilter] = useState(false); // フィルタリングを実行するかどうかの状態管理
 
-  // 班名のオプションを定義
-  const teams = ["全て", "it班", "ゲーム班", "絵描き班", "dtm班"];
+  const [events, setEvents] = useState<Event[]>([]);
+  const [filteredData, setFilteredData] = useState<Event[]>([]); // フィルタリングされたデータの状態管理
+  const [loading, setLoading] = useState(true); // ローディング状態の管理
+  const [teams, setTeams] = useState<string[]>(["全て"]); // 班名のオプションの状態管理
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/api/v1/all_events", {
+          mode: "cors",
+        });
+        const data: Event[] = await response.json();
+        setEvents(data);
+        setFilteredData(data); // 初期状態でフィルタリングされたデータを設定
+
+        // ユニークなserver_nameを抽出してteamsを更新
+        const serverNames = Array.from(new Set(data.map((event: Event) => event.server_name)));
+        setTeams(["全て", ...serverNames]);
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setLoading(false); // データ取得完了後、ローディングを終了
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const [shouldFilter, setShouldFilter] = useState(false); // フィルタリングを実行するかどうかの状態管理
 
   // データセット内の最も古い日時を取得
   const getEarliestDate = () => {
-    return data.reduce((earliest, item) => {
-      const itemDate = new Date(item.date);
+    return events.reduce((earliest, item) => {
+      const itemDate = new Date(item.start_date);
       return itemDate < earliest ? itemDate : earliest;
-    }, new Date(data[0].date));
+    }, new Date(events[0]?.start_date));
   };
 
   // データセット内の最も未来の日時を取得
   const getLatestDate = () => {
-    return data.reduce((latest, item) => {
-      const itemDate = new Date(item.date);
+    return events.reduce((latest, item) => {
+      const itemDate = new Date(item.end_date);
       return itemDate > latest ? itemDate : latest;
-    }, new Date(data[0].date));
+    }, new Date(events[0]?.end_date));
   };
-
-  // コンポーネントがマウントされたときにテキストをフォーマット
-  useEffect(() => {
-    const cells = document.querySelectorAll(".content");
-    cells.forEach((cell) => {
-      const text = cell.textContent || "";
-      const formattedText = text.replace(/(.{30})/g, "$1\n");
-      cell.textContent = formattedText;
-    });
-  }, [currentPage]);
 
   // データをフィルタリングおよびソート
   useEffect(() => {
     if (shouldFilter) {
-      let filtered = [...data]; // データのコピーを作成
+      let filtered = [...events]; // データのコピーを作成
 
       // 班名のフィルタリング
       if (selectedTeam !== "全て") {
-        filtered = filtered.filter((item) => item.team === selectedTeam);
+        filtered = filtered.filter((item) => item.server_name === selectedTeam);
       }
 
       // 日付範囲のフィルタリング
@@ -90,15 +87,16 @@ const Table: React.FC = () => {
       const end = endDate.year && endDate.month && endDate.day ? parseDate(endDate) : getLatestDate();
 
       filtered = filtered.filter((item) => {
-        const itemDate = new Date(item.date);
-        return itemDate >= start && itemDate <= end;
+        const itemStartDate = new Date(item.start_date);
+        const itemEndDate = new Date(item.end_date);
+        return itemStartDate >= start && itemEndDate <= end;
       });
 
       // 日時のソート
       if (sortOrder !== null) {
         filtered = filtered.sort((a, b) => {
-          const dateA = new Date(a.date).getTime();
-          const dateB = new Date(b.date).getTime();
+          const dateA = new Date(a.start_date).getTime();
+          const dateB = new Date(b.start_date).getTime();
           return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
         });
       }
@@ -106,7 +104,7 @@ const Table: React.FC = () => {
       setFilteredData(filtered);
       setShouldFilter(false); // フィルタリングをリセット
     }
-  }, [shouldFilter, sortOrder, selectedTeam, startDate, endDate]);
+  }, [shouldFilter, sortOrder, selectedTeam, startDate, endDate, events]);
 
   // ページネーションのためのデータの分割
   const indexOfLastRow = currentPage * rowsPerPage;
@@ -142,6 +140,10 @@ const Table: React.FC = () => {
   const handleTeamChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedTeam(e.target.value);
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container">
@@ -215,31 +217,49 @@ const Table: React.FC = () => {
               タイトル
             </th>
             <th className="header-team" scope="col">
-              班名
+              概要
             </th>
             <th className="header-price" scope="col">
               場所
             </th>
             <th className="header-date" scope="col">
-              日時
+              日程
               <button className="sort-button" onClick={toggleSortOrder}>
                 {sortOrder === "asc" ? "▲" : sortOrder === "desc" ? "▼" : "■"}
               </button>
+            </th>
+            <th className="header-start_time" scope="col">
+              開始時間
+            </th>
+            <th className="header-end_time" scope="col">
+              終了時間
+            </th>
+            <th className="header-server" scope="col">
+              サーバー
             </th>
           </tr>
         </thead>
         <tbody>
           {currentRows.map((row, index) => (
             <tr key={index}>
-              <td className="content">{row.content}</td>
-              <td data-label="team" className="team">
-                {row.team}
+              <td className="content">{row.title || "-"}</td>
+              <td data-label="description" className="team">
+                {row.description || "-"}
               </td>
-              <td data-label="price" className="price2">
-                {row.price2}
+              <td data-label="place" className="price2">
+                {row.place || "-"}
               </td>
-              <td data-label="date" className="date">
-                {row.date}
+              <td data-label="start_date" className="date">
+                {new Date(row.start_date).toLocaleDateString() || "-"}
+              </td>
+              <td data-label="start_time" className="start_time">
+                {new Date(row.start_date).toLocaleTimeString() || "-"}
+              </td>
+              <td data-label="end_date" className="end_time">
+                {new Date(row.end_date).toLocaleTimeString() || "-"}
+              </td>
+              <td data-label="server" className="server">
+                {row.server_name || "-"}
               </td>
             </tr>
           ))}
