@@ -1,6 +1,8 @@
 services:
   discord_bot:
     container_name: discord_bot_container
+    ports:
+      - "4000:4000"
     build:
       context: .
       dockerfile: Dockerfile
