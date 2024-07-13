@@ -1,0 +1,203 @@
+/* CSS */
+/* 全体のスタイル設定 */
+body {
+  font-family: "Open Sans", sans-serif; /* フォントファミリーの設定 */
+  line-height: 1.25; /* 行の高さの設定 */
+  background-color: #f8f9fa; /* 背景色の設定 */
+  margin: 0; /* マージンのリセット */
+  padding: 20px; /* パディングの設定 */
+}
+
+/* コンテナのスタイル設定 */
+.container {
+  width: 90%; /* 幅の設定 */
+  max-width: 2500px; /* 最大幅の設定 */
+  margin: 0 auto; /* 中央揃え */
+  text-align: center; /* テキストを中央揃え */
+}
+
+/* 見出しのスタイル設定 */
+h1 {
+  color: #164892; /* テキストの色 */
+  margin-bottom: 20px; /* 下部のマージン */
+  font-size: 40px;
+}
+
+/* テーブル全体のスタイル設定 */
+table {
+  border-collapse: collapse; /* 境界線の重なりをなくす */
+  width: 100%; /* 幅の設定 */
+  margin: 0 auto; /* 中央揃え */
+  background-color: #eaedf5; /* 背景色の設定 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ボックスシャドウの設定 */
+  table-layout: fixed; /* 固定レイアウトの設定 */
+  overflow-wrap: break-word; /* 長い単語を折り返す */
+  white-space: pre-wrap; /* 必要に応じて折り返す */
+}
+
+/* テーブルヘッドのスタイル設定 */
+thead {
+  background-color: #164892; /* 背景色の設定 */
+  color: #fff; /* テキストの色 */
+  font-weight: bold;
+  font-size: 25px; /* フォントサイズの設定 */
+  border-right: 2px solid #fff; /* 右側の境界線の設定 */
+}
+
+thead .header-content,
+thead .header-team,
+thead .header-price,
+thead .header-date,
+thead .header-start_time,
+thead .header-end_time {
+  text-align: center; /* テキストを中央揃え */
+  margin: 0 auto; /* 中央揃え */
+  padding: 5px 3px 5px 3px;
+}
+
+/* テーブルボディの行のスタイル設定 */
+tbody tr {
+  border-bottom: 1px solid #ddd; /* 下部境界線の設定 */
+  background-color: #fff; /* 背景色の設定 */
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f2f2f2; /* 奇数行の背景色 */
+}
+
+/* テーブルボディのセルのスタイル設定 */
+tbody .content, .price2, .date, .start_time, .end_time, .server {
+  color: #000; /* テキストの色 */
+  font-weight: bold; /* フォントの太さ */
+  font-size: 25px; /* フォントサイズの設定 */
+  margin: 0 auto; /* 中央揃え */
+  text-align: middle;
+  border-right: 3px solid #fff; /* 右側の境界線の設定 */
+  padding: 15px 10px; /* パディングの設定 */
+  word-break: break-word; /* 行の折り返しを有効にする */
+  overflow-wrap: break-word; /* 長い単語を折り返す */
+  white-space: pre-wrap; /* 必要に応じて折り返す */
+}
+.team{
+  color: #000; /* テキストの色 */
+  font-weight: bold; /* フォントの太さ */
+  font-size: 18px; /* フォントサイズの設定 */
+  margin: 0 auto; /* 中央揃え */
+  text-align: middle;
+  border-right: 3px solid #fff; /* 右側の境界線の設定 */
+  padding: 15px 10px; /* パディングの設定 */
+  word-break: break-word; /* 行の折り返しを有効にする */
+  overflow-wrap: break-word; /* 長い単語を折り返す */
+  white-space: pre-wrap; /* 必要に応じて折り返す */
+}
+/* 日時の範囲選択 */
+.date-picker-container {
+  margin-bottom: 30px; /* 下部のマージン */
+  display: flex;
+  align-items: center; /* 入力フィールドとラベルを中央揃え */
+  font-size: 25px;
+
+}
+
+.date-picker-label {
+  margin-right: 10px; /* 右側のマージン */
+  font-weight: bold; /* フォントの太さ */
+}
+
+.date-picker {
+  display: flex;
+  align-items: center; /* 入力フィールドと区切り文字を中央揃え */
+}
+
+.date-picker .tilde {
+  margin: 0 10px; /* Add margin to the tilde for spacing */
+}
+
+/* チームセレクターのスタイル設定 */
+.team-selector {
+  display: flex;
+  justify-content: flex-start; /* 左揃え */
+  align-items: center; /* 中央揃え */
+  margin-bottom: 20px; /* 下部のマージン */
+}
+
+/* チームセレクタラベルのスタイル設定 */
+.team-selector label {
+  margin-right: 10px; /* 右側のマージン */
+  font-weight: bold; /* フォントの太さ */
+  font-size: 25px;
+}
+
+/* チームセレクトボックスのスタイル設定 */
+.team-selector select {
+  font-size: 25px; /* フォントサイズの設定 */
+  padding: 5px 10px; /* パディングの設定 */
+  width: 200px; /* 幅の設定 */
+}
+
+button.sort-button {
+  background: none;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+  margin: 0 auto; /* 中央揃え */
+}
+
+button.sort-button:focus {
+  outline: none;
+}
+
+button {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #164892;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0d3a6a;
+}
+
+button.search-button {
+  margin-left: 20px;
+  padding: 5px 10px;
+  margin-left: auto;
+  margin-right: 0;
+  text-align: middle;
+  font-size: 25px;
+  width: 150px; /* 幅の設定 */
+}
+
+input {
+  width: 100px;
+  padding: 5px;
+  margin-right: 5px;
+  margin-left: 20px;
+  font-size: 25px;
+}
+
+/* ページネーションのスタイル設定 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* 上部のマージン */
+  font-size: 24px; /* フォントサイズの設定 */
+}
+
+.pagination button {
+  margin: 0 10px; /* 左右のマージン */
+  padding: 10px 20px; /* パディングの設定 */
+  border: none; /* 境界線なし */
+  background-color: #164892; /* 背景色の設定 */
+  color: white; /* テキストの色 */
+  cursor: pointer; /* カーソルをポインターに変更 */
+  font-size: 24px; /* フォントサイズの設定 */
+}
+
+.pagination button:disabled {
+  background-color: #ddd; /* 背景色の設定 */
+  cursor: not-allowed; /* カーソルを禁止マークに変更 */
+}
