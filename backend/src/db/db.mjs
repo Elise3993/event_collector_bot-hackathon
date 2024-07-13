@@ -1,6 +1,8 @@
 import dotenv from "dotenv";
 import mysql from "mysql2";
 
+dotenv.config();
+
 const mysqlConfig = {
   host: process.env.MYSQL_CONTAINER_NAME,
   user: process.env.MYSQL_USER,
@@ -9,8 +11,6 @@ const mysqlConfig = {
 };
 
 export function setupDataBaseConnection() {
-  dotenv.config();
-
   // データベース接続設定
   const connection = mysql.createConnection(mysqlConfig);
 
@@ -21,4 +21,6 @@ export function setupDataBaseConnection() {
     }
     console.log("MySQLデータベースに接続しました。");
   });
+
+  return connection;
 }
