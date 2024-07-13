@@ -7,10 +7,10 @@ export const CommandDefine = [
       option.setName("name").setDescription("イベント名を入力してください。").setRequired(false),
     )
     .addStringOption((option) =>
-      option.setName("start_time").setDescription("開始日時を入力してください。").setRequired(false),
+      option.setName("start_time").setDescription("開始日時を入力してください。YYYY/M/D h:m").setRequired(false),
     )
     .addStringOption((option) =>
-      option.setName("end_time").setDescription("終了日時を入力してください。").setRequired(false),
+      option.setName("end_time").setDescription("終了日時を入力してください。YYYY/M/D h:m").setRequired(false),
     )
     .addStringOption((option) =>
       option.setName("description").setDescription("イベントの説明を入力してください。").setRequired(false),
