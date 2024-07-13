@@ -1,15 +1,10 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
 import app from "./api/events.mjs";
-
-import {
-  CommandDefine,
-  ModalDefine,
-  ReceiveCommand,
-  ReceiveModal,
-} from "./command/add.mjs";
+import { addCommand } from "./command/add.mjs";
 dotenv.config();
 const { token } = process.env;
+
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -34,11 +29,11 @@ client.on(Events.InteractionCreate, async (interaction) => {
       console.log("add command triggered!");
       if (interaction.options._hoistedOptions.length === 0) {
         console.log("Form option selected!");
-        interaction.showModal(ModalDefine);
+        interaction.showModal(addCommand.ModalDefine);
       }
-      ReceiveCommand(interaction);
+      addCommand.ReceiveCommand(interaction);
     }
-    ReceiveModal(interaction);
+    addCommand.ReceiveModal(interaction);
   } catch (err) {
     console.error(err, interaction);
   }
