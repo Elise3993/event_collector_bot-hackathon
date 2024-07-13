@@ -47,7 +47,9 @@ thead {
 thead .header-content,
 thead .header-team,
 thead .header-price,
-thead .header-date {
+thead .header-date,
+thead .header-start_time,
+thead .header-end_time {
   text-align: center; /* テキストを中央揃え */
   margin: 0 auto; /* 中央揃え */
   padding: 5px 3px 5px 3px;
@@ -64,7 +66,7 @@ tbody tr:nth-child(odd) {
 }
 
 /* テーブルボディのセルのスタイル設定 */
-tbody .content, .team, .price2, .date {
+tbody .content, .price2, .date, .start_time, .end_time, .server {
   color: #000; /* テキストの色 */
   font-weight: bold; /* フォントの太さ */
   font-size: 25px; /* フォントサイズの設定 */
@@ -76,7 +78,18 @@ tbody .content, .team, .price2, .date {
   overflow-wrap: break-word; /* 長い単語を折り返す */
   white-space: pre-wrap; /* 必要に応じて折り返す */
 }
-
+.team{
+  color: #000; /* テキストの色 */
+  font-weight: bold; /* フォントの太さ */
+  font-size: 18px; /* フォントサイズの設定 */
+  margin: 0 auto; /* 中央揃え */
+  text-align: middle;
+  border-right: 3px solid #fff; /* 右側の境界線の設定 */
+  padding: 15px 10px; /* パディングの設定 */
+  word-break: break-word; /* 行の折り返しを有効にする */
+  overflow-wrap: break-word; /* 長い単語を折り返す */
+  white-space: pre-wrap; /* 必要に応じて折り返す */
+}
 /* 日時の範囲選択 */
 .date-picker-container {
   margin-bottom: 30px; /* 下部のマージン */
