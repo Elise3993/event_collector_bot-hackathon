@@ -1,4 +1,4 @@
-import {setupDataBaseConnection} from "./db.mjs";
+import { setupDataBaseConnection } from "./db.mjs";
 
 export function createEventDataTable() {
   const connection = setupDataBaseConnection();
@@ -17,6 +17,7 @@ export function createEventDataTable() {
     author VARCHAR(255),
     server_name VARCHAR(255)
   )`;
+
   connection.query(query, (err, results) => {
     if (err) throw err;
     console.log("テーブル作成成功:", results);
@@ -56,4 +57,24 @@ export function deleteEventDataById(id) {
     console.log("データ削除成功:", results);
   });
   connection.end();
+}
+
+/**
+ * SQLクエリを実行する関数
+ * DBに対して上記にない処理を実行したい際、即席でSQL書いて使用してください
+ * @param {string} query - 実行するSQLクエリ
+ * @param {Array} params - SQLクエリのパラメータ
+ * @returns {Promise} - クエリ実行結果を返すPromise
+ */
+export function executeQuery(query, params = []) {
+  return new Promise((resolve, reject) => {
+    const connection = setupDataBaseConnection();
+    connection.query(query, params, (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
 }
