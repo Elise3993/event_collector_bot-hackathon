@@ -12,6 +12,7 @@
     "lint": "eslint ./"
   },
   "dependencies": {
+    "dayjs": "^1.11.11",
     "cors": "^2.8.5",
     "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",

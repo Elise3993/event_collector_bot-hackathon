@@ -3,8 +3,6 @@ import dotenv from "dotenv";
 import app from "./api/api.mjs";
 import { addCommand } from "./command/add.mjs";
 dotenv.config();
-// import { fs } from 'fs';
-// const token = JSON.parse(fs.readFileSync('../config.json', 'utf-8')).token;
 const { token } = process.env;
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
@@ -13,8 +11,9 @@ const client = new Client({
 client.once(Events.ClientReady, async (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`);
   try {
-    await client.application.commands.set([addCommand.CommandDefine], "1259019648591204465");
-    console.log("Slash Commands Registered!");
+    client.application.commands
+      .set([addCommand.CommandDefine], "1259019648591204465")
+      .then(console.log("Slash Commands Registered!"));
   } catch (err) {
     console.error(err);
   }
