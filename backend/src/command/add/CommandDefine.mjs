@@ -1,6 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
-export const CommandDefine = [
-  new SlashCommandBuilder()
+export const CommandDefine = new SlashCommandBuilder()
     .setName("add")
     .setDescription("イベントを追加します。")
     .addStringOption((option) =>
@@ -17,5 +16,4 @@ export const CommandDefine = [
     )
     .addStringOption((option) =>
       option.setName("location").setDescription("イベントの場所を入力してください。").setRequired(false),
-    ),
-];
+    );

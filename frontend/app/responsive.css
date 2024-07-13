@@ -1,0 +1,214 @@
+/* 全体のスタイル設定 */
+body {
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.25;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+  }
+
+  /* コンテナのスタイル設定 */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  /* 見出しのスタイル設定 */
+  h1 {
+    color: #164892;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+
+  /* テーブル全体のスタイル設定 */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #eaedf5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    table-layout: fixed;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+
+  /* テーブルヘッドのスタイル設定 */
+  thead {
+    background-color: #164892;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    border-right: 2px solid #fff;
+  }
+
+  thead th {
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* テーブルボディの行のスタイル設定 */
+  tbody tr {
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+
+  /* テーブルボディのセルのスタイル設定 */
+  tbody td {
+    color: #000;
+    font-weight: bold;
+    font-size: 1rem;
+    text-align: center;
+    padding: 10px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+  }
+
+  /* 日時の範囲選択 */
+  .date-picker-container {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+  }
+
+  .date-picker-label {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  .date-picker {
+    display: flex;
+    align-items: center;
+  }
+
+  .date-picker .tilde {
+    margin: 0 10px;
+  }
+
+  /* チームセレクターのスタイル設定 */
+  .team-selector {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .team-selector label {
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .team-selector select {
+    font-size: 1rem;
+    padding: 5px 10px;
+    width: 200px;
+  }
+
+  button.sort-button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0 auto;
+  }
+
+  button.sort-button:focus {
+    outline: none;
+  }
+
+  button {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #164892;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  button:hover {
+    background-color: #0d3a6a;
+  }
+
+  button.search-button {
+    margin-left: 20px;
+    padding: 5px 10px;
+    margin-left: auto;
+    margin-right: 0;
+    text-align: middle;
+    font-size: 1rem;
+    width: 150px;
+  }
+
+  input {
+    width: 100px;
+    padding: 5px;
+    margin-right: 5px;
+    margin-left: 20px;
+    font-size: 1rem;
+  }
+
+  /* ページネーションのスタイル設定 */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+
+  .pagination button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #164892;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .pagination button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+
+  /* スマホ用のスタイル */
+  @media (max-width: 768px) {
+    table {
+      display: block;
+      overflow-x: auto;
+    }
+
+    thead {
+      display: none;
+    }
+
+    tbody td {
+      display: block;
+      text-align: right;
+      padding-left: 50%;
+      position: relative;
+    }
+
+    tbody td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 10px;
+      width: calc(50% - 20px);
+      white-space: nowrap;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    tbody td:last-child {
+      border-bottom: 2px solid #ddd;
+    }
+  }
