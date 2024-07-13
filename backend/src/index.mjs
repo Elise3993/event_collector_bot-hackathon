@@ -12,7 +12,7 @@ client.once(Events.ClientReady, async (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`);
   try {
     client.application.commands
-      .set([addCommandDefine.CommandDefine], "1259019648591204465")
+      .set([addCommand.CommandDefine], "1259019648591204465")
       .then(console.log("Slash Commands Registered!"));
   } catch (err) {
     console.error(err);
