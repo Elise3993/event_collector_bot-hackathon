@@ -1,4 +1,4 @@
-# event_collector_bot-hackathon
+# This Co報
 
 2024年7月の技育ハッカソンvol.8の提出作品
 
