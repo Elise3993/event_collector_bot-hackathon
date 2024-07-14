@@ -147,7 +147,7 @@ const Table: React.FC = () => {
 
   return (
     <div className="container">
-      <h1>プラン一覧</h1>
+      <h1>イベント一覧</h1>
       <div className="filters">
         <div className="date-picker-container">
           <span className="date-picker-label">範囲日時指定：</span>

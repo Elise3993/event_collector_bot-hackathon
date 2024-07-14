@@ -19,8 +19,8 @@ body {
 /* 見出しのスタイル設定 */
 h1 {
   color: #164892; /* テキストの色 */
-  margin-bottom: 20px; /* 下部のマージン */
-  font-size: 40px;
+  padding-bottom: 20px;
+  font-size: 45px;
 }
 
 /* テーブル全体のスタイル設定 */
