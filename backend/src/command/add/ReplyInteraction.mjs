@@ -1,4 +1,5 @@
 import { EmbedBuilder } from "discord.js";
+import { insertEventData } from "../../db/events.mjs";
 export const ReceiveInteraction = async (interaction, name, start_time, end_time, description, location) => {
   let errorStack = [];
   if (start_time !== null && start_time.format() === "Invalid Date") {
@@ -26,6 +27,16 @@ export const ReceiveInteraction = async (interaction, name, start_time, end_time
     return;
   }
 
+  insertEventData({
+    title: name,
+    start_date: start_time === null ? null : start_time.format(),
+    end_date: end_time === null ? null : end_time.format(),
+    place: location,
+    description: description,
+    author: interaction.user.globalName,
+    server_name: interaction.guild.name,
+  });
+
   let fields = [];
   if (location !== null) {
     fields.push({ name: "場所", value: location, inline: false });
@@ -38,7 +49,7 @@ export const ReceiveInteraction = async (interaction, name, start_time, end_time
   }
   const embed = new EmbedBuilder()
     .setColor("#0099ff")
-    .setTitle(name)
+    .setTitle(`イベントの追加：${name}`)
     .setAuthor({ name: interaction.user.globalName, iconURL: interaction.user.avatarURL() })
     .setDescription(description || null)
     .addFields(...fields)

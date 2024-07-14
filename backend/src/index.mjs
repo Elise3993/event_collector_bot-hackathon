@@ -7,13 +7,20 @@ dotenv.config();
 const { token } = process.env;
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
 client.once(Events.ClientReady, async (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`);
   try {
-    await client.application.commands.set([addCommand.CommandDefine, listCommand.CommandDefine], "1259019648591204465");
+    await client.application.commands.set(
+      [addCommand.CommandDefine, listCommand.CommandDefine],
+      "1259019648591204465"
+    );
     console.log("Slash Commands Registered!");
   } catch (err) {
     console.error(err);
