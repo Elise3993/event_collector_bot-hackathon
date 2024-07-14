@@ -4,6 +4,7 @@ import app from "./api/events.mjs";
 import { addCommand } from "./command/add.mjs";
 import { deleteCommand } from "./command/delete.mjs";
 import { listCommand } from "./command/list.mjs";
+import { createEventDataTable } from "./db/events.mjs";
 dotenv.config();
 const { token } = process.env;
 
@@ -60,3 +61,4 @@ const PORT = 4000;
 app.listen(4000, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+createEventDataTable();
