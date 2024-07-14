@@ -40,14 +40,20 @@ export function insertEventData(data) {
 }
 
 export function fetchAllEventData() {
-  const connection = setupDataBaseConnection();
-  const query = `SELECT * FROM discord_events`;
-  connection.query(query, (err, results) => {
-    if (err) throw err;
-    console.log("データ取得成功:", results);
-    return results;
+  return new Promise((resolve, reject) => {
+    const connection = setupDataBaseConnection();
+    const query = `SELECT * FROM discord_events`;
+    connection.query(query, (err, results) => {
+      if (err) {
+        reject(err);
+        connection.end();
+        return;
+      }
+      console.log("データ取得成功:", results);
+      resolve(results);
+      connection.end();
+    });
   });
-  connection.end();
 }
 
 export function deleteEventDataById(id) {
