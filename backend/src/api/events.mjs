@@ -1,5 +1,6 @@
-import express from "express";
 import cors from "cors";
+import express from "express";
+import { fetchAllEventData } from "../db/events.mjs";
 
 const app = express();
 
@@ -12,34 +13,22 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get("/api/v1/all_events", (req, res) => {
+app.get("/api/v1/all_events", async (req, res) => {
   console.log("GET /api/v1/all_events");
-  res.json([
-    {
-      title: "イベント1",
-      start_date: "2023-04-01T18:00:00.000+09:00",
-      end_date: "2023-04-02T02:00:00.000+09:00",
-      description: "これはイベント1の説明です。",
-      place: "東京",
-      server_name: "サーバーA",
-    },
-    {
-      title: "イベント2",
-      start_date: "2023-04-02T19:00:00.000+09:00",
-      end_date: "2023-04-03T00:00:00.000+09:00",
-      description: null,
-      place: null,
-      server_name: "サーバーB",
-    },
-    {
-      title: "イベント3",
-      start_date: "2023-04-03T20:00:00.000+09:00",
-      end_date: "2023-04-04T01:00:00.000+09:00",
-      description: "これはイベント3の説明です。",
-      place: "大阪",
-      server_name: "サーバーC",
-    },
-  ]);
+
+  const events = await fetchAllEventData();
+  const organizedEventInfo = events.map((event) => {
+    return {
+      title: event.title,
+      start_date: event.start_date,
+      end_date: event.end_date,
+      description: event.description,
+      place: event.place,
+      server_name: event.server_name,
+    };
+  });
+
+  res.json(organizedEventInfo);
 });
 
 export default app;
