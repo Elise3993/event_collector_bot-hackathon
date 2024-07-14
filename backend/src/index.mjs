@@ -2,17 +2,25 @@ import { Client, Events, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
 import app from "./api/events.mjs";
 import { addCommand } from "./command/add.mjs";
+import { listCommand } from "./command/list.mjs";
 dotenv.config();
 const { token } = process.env;
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
 client.once(Events.ClientReady, async (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`);
   try {
-    await client.application.commands.set([addCommand.CommandDefine], "1259019648591204465");
+    await client.application.commands.set(
+      [addCommand.CommandDefine, listCommand.CommandDefine],
+      "1259019648591204465"
+    );
     console.log("Slash Commands Registered!");
   } catch (err) {
     console.error(err);
@@ -29,6 +37,10 @@ client.on(Events.InteractionCreate, async (interaction) => {
       addCommand.ReceiveCommand(interaction);
     }
     addCommand.ReceiveModal(interaction);
+    if (interaction.commandName === "list") {
+      console.log("list command triggered!");
+      listCommand.ReceiveCommand(interaction);
+    }
   } catch (err) {
     console.error(err, interaction);
   }
